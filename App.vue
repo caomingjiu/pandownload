@@ -22,4 +22,5 @@
 	@import url("/common/free.css");
 	/* 引入图标库 */
 	@import url("/common/icon.css");
+	@import url("/common/icon-file.css");
 </style>

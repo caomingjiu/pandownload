@@ -27,20 +27,58 @@
 				<input style="height: 70rpx;padding-left: 70rpx;" type="text" class="bg-light font-md rounded-circle" placeholder="搜索网盘文件"/>
 			</view>
 		</view>
+		<view v-for="(item,index) in list" :key="index">
+			<fList :item="item"></fList>
+		</view>
+		
 	</view>
 </template>
 
 <script>
 import navBar from '@/components/common/nav-bar.vue';
+import fList from '@/components/common/f-list.vue'
 // import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 export default {
 	components: {
-		navBar
+		navBar,
+		fList
 		// uniSearchBar
 	},
 	data() {
 		return {
-			title: 'Hello'
+			title: 'Hello',
+			list: [
+			        {
+			          type: 'dir',
+			          name: '我的笔记',
+			          create_time: '2020-10-21 08:00',
+			          checked: false
+			        },
+			        {
+			          type: 'image',
+			          name: '风景.jpg',
+			          create_time: '2020-10-21 08:00',
+			          checked: false
+			        },
+			        {
+			          type: 'video',
+			          name: 'uniapp实战教程.mp4',
+			          create_time: '2020-10-21 08:00',
+			          checked: false
+			        },
+			        {
+			          type: 'text',
+			          name: '记事本.txt',
+			          create_time: '2020-10-21 08:00',
+			          checked: false
+			        },
+			        {
+			          type: 'none',
+			          name: '压缩包.rar',
+			          create_time: '2020-10-21 08:00',
+			          checked: false
+			        }
+			      ]
 		};
 	},
 	onLoad() {},
