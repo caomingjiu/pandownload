@@ -61,6 +61,23 @@
     <view v-for="(item, index) in list" :key="index">
       <fList :item="item" :index="index" @select="select"></fList>
     </view>
+	<view v-if="checkCount > 0">
+        <view style="height: 115rpx"></view>
+        <view
+          style="height: 115rpx"
+          class="flex align-stretch bg-primary text-white fixed-bottom"
+        >
+          <view
+		     class="flex-1 flex flex-column align-center justify-center"
+			 style="line-height:1.5;"
+			 v-for="(item, index) in actions" :key="index"
+			 hover-class="bg-hover-primary"
+		  >
+            <text class="iconfont" :class="item.icon"></text>
+            {{ item.name }}
+          </view>
+        </view>
+      </view>
   </view>
 </template>
 
@@ -125,7 +142,7 @@ export default {
       this.list[e.index].checked = e.value;
     },
     handleCheckAll(checked) {
-      this.list.forEach(item => {
+      this.list.forEach((item) => {
         item.checked = checked;
       });
     },
@@ -136,6 +153,38 @@ export default {
     },
     checkCount() {
       return this.checkList.length;
+    },
+    actions() {
+      if (this.checkCount > 1) {
+        return [
+          {
+            icon: "icon-xiazai",
+            name: "下载",
+          },
+          {
+            icon: "icon-shanchu",
+            name: "删除",
+          },
+        ];
+      }
+      return [
+        {
+          icon: "icon-xiazai",
+          name: "下载",
+        },
+        {
+          icon: "icon-fenxiang-1",
+          name: "分享",
+        },
+        {
+          icon: "icon-shanchu",
+          name: "删除",
+        },
+        {
+          icon: "icon-chongmingming",
+          name: "重命名",
+        },
+      ];
     },
   },
 };
