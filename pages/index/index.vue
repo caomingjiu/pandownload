@@ -2,20 +2,37 @@
   <view>
     <!-- 自定义导航栏 -->
     <nav-bar>
-      <text slot="left" class="font-md ml-3">首页</text>
-      <template slot="right">
+      <template v-if="checkCount === 0">
+        <text slot="left" class="font-md ml-3">首页</text>
+        <template slot="right">
+          <view
+            class="flex align-center justify-center bg-icon rounded-circle mr-3"
+            style="width: 60rpx; height: 60rpx"
+          >
+            <text class="iconfont icon-zengjia"></text>
+          </view>
+          <view
+            class="flex align-center justify-center bg-icon rounded-circle mr-3"
+            style="width: 60rpx; height: 60rpx"
+          >
+            <text class="iconfont icon-gengduo"></text>
+          </view>
+        </template>
+      </template>
+      <template v-else>
         <view
-          class="flex align-center justify-center bg-icon rounded-circle mr-3"
-          style="width: 60rpx; height: 60rpx"
+          slot="left"
+          class="font-md ml-3 text-primary"
+          @click="handleCheckAll(false)"
+          >取消</view
         >
-          <text class="iconfont icon-zengjia"></text>
-        </view>
+        <text class="font-md font-weight-bold">已选中{{ checkCount }}</text>
         <view
-          class="flex align-center justify-center bg-icon rounded-circle mr-3"
-          style="width: 60rpx; height: 60rpx"
+          slot="right"
+          class="font-md mr-3 text-primary"
+          @click="handleCheckAll(true)"
+          >全选</view
         >
-          <text class="iconfont icon-gengduo"></text>
-        </view>
       </template>
     </nav-bar>
     <view class="px-3 py-2">
@@ -106,6 +123,19 @@ export default {
   methods: {
     select(e) {
       this.list[e.index].checked = e.value;
+    },
+    handleCheckAll(checked) {
+      this.list.forEach(item => {
+        item.checked = checked;
+      });
+    },
+  },
+  computed: {
+    checkList() {
+      return this.list.filter((item) => item.checked);
+    },
+    checkCount() {
+      return this.checkList.length;
     },
   },
 };
