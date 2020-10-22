@@ -245,7 +245,12 @@ var render = function() {
                       {
                         staticClass: _vm._$g(5, "sc"),
                         staticStyle: { width: "60rpx", height: "60rpx" },
-                        attrs: { _i: 5 }
+                        attrs: { _i: 5 },
+                        on: {
+                          click: function($event) {
+                            return _vm.$handleViewEvent($event)
+                          }
+                        }
                       },
                       [
                         _c("v-uni-text", {
@@ -440,6 +445,49 @@ var render = function() {
           })
         ],
         1
+      ),
+      _c(
+        "uniPopup",
+        { ref: "add", attrs: { _i: 28 } },
+        [
+          _c(
+            "v-uni-view",
+            {
+              staticClass: _vm._$g(29, "sc"),
+              staticStyle: { height: "200rpx" },
+              attrs: { _i: 29 }
+            },
+            _vm._l(_vm._$g(30, "f"), function(item, index, $22, $32) {
+              return _c(
+                "v-uni-view",
+                {
+                  key: item,
+                  staticClass: _vm._$g("30-" + $32, "sc"),
+                  attrs: { "hover-class": "bg-light", _i: "30-" + $32 }
+                },
+                [
+                  _c("v-uni-text", {
+                    staticClass: _vm._$g("31-" + $32, "sc"),
+                    class: _vm._$g("31-" + $32, "c"),
+                    staticStyle: { width: "110rpx", height: "100rpx" },
+                    attrs: { _i: "31-" + $32 }
+                  }),
+                  _c(
+                    "v-uni-text",
+                    {
+                      staticClass: _vm._$g("32-" + $32, "sc"),
+                      attrs: { _i: "32-" + $32 }
+                    },
+                    [_vm._v(_vm._$g("32-" + $32, "t0-0"))]
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
       )
     ],
     2
@@ -478,7 +526,8 @@ __webpack_require__.r(__webpack_exports__);
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 var _navBar = _interopRequireDefault(__webpack_require__(/*! @/components/common/nav-bar.vue */ 7));
 var _fList = _interopRequireDefault(__webpack_require__(/*! @/components/common/f-list.vue */ 24));
-var _fDialog = _interopRequireDefault(__webpack_require__(/*! @/components/common/f-dialog.vue */ 34));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+var _fDialog = _interopRequireDefault(__webpack_require__(/*! @/components/common/f-dialog.vue */ 34));
+var _uniPopup = _interopRequireDefault(__webpack_require__(/*! ../../components/uni-ui/uni-popup/uni-popup.vue */ 37));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
 
   data: function data() {
@@ -489,7 +538,8 @@ var _fDialog = _interopRequireDefault(__webpack_require__(/*! @/components/commo
   components: {
     'navBar': _navBar.default,
     'fList': _fList.default,
-    'fDialog': _fDialog.default } };exports.default = _default;
+    'fDialog': _fDialog.default,
+    'uniPopup': _uniPopup.default } };exports.default = _default;
 
 /***/ }),
 /* 7 */

@@ -8,6 +8,7 @@
           <view
             class="flex align-center justify-center bg-icon rounded-circle mr-3"
             style="width: 60rpx; height: 60rpx"
+			@tap="openAddDialog"
           >
             <text class="iconfont icon-zengjia"></text>
           </view>
@@ -90,6 +91,22 @@
         placeholder="重命名"
       />
     </fDialog>
+	<uniPopup ref="add" type="bottom">
+        <view class="bg-white flex" style="height:200rpx">
+			<view
+			   class="flex-1 flex align-center justify-center flex-column"
+			   hover-class="bg-light"
+			   v-for="(item,index) in addList"
+			   :key="index"
+			>
+			   <text style="width:110rpx;height:100rpx;"
+			     class=" rounded-circle bg-light iconfont flex align-center justify-center"
+				 :class="item.icon+' '+item.color"
+			   ></text>
+			   <text class="font text-muted">{{item.name}}</text>
+			</view>
+		</view>
+	</uniPopup>
   </view>
 </template>
 
@@ -97,12 +114,14 @@
 import navBar from "@/components/common/nav-bar.vue";
 import fList from "@/components/common/f-list.vue";
 import fDialog from "@/components/common/f-dialog.vue";
+import uniPopup from "../../components/uni-ui/uni-popup/uni-popup.vue";
 // import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 export default {
   components: {
     navBar,
     fList,
     fDialog,
+    uniPopup,
     // uniSearchBar
   },
   data() {
@@ -141,6 +160,28 @@ export default {
           checked: false,
         },
       ],
+      addList: [
+        {
+          icon: "icon-file-b-6",
+          color: "text-success",
+          name: "上传图片",
+        },
+        {
+          icon: "icon-file-b-9",
+          color: "text-primary",
+          name: "上传视频",
+        },
+        {
+          icon: "icon-file-b-8",
+          color: "text-muted",
+          name: "上传文件",
+        },
+        {
+          icon: "icon-file-b-2",
+          color: "text-warning",
+          name: "新建文件夹",
+        },
+      ],
     };
   },
   onLoad() {
@@ -160,7 +201,10 @@ export default {
       this.list.forEach((item) => {
         item.checked = checked;
       });
-    },
+	},
+	openAddDialog(){
+       this.$refs.add.open();
+	},
     handleBottomEvent(item) {
       switch (item.name) {
         case "删除":
