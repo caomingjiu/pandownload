@@ -61,34 +61,39 @@
     <view v-for="(item, index) in list" :key="index">
       <fList :item="item" :index="index" @select="select"></fList>
     </view>
-	<view v-if="checkCount > 0">
-        <view style="height: 115rpx"></view>
+    <view v-if="checkCount > 0">
+      <view style="height: 115rpx"></view>
+      <view
+        style="height: 115rpx"
+        class="flex align-stretch bg-primary text-white fixed-bottom"
+      >
         <view
-          style="height: 115rpx"
-          class="flex align-stretch bg-primary text-white fixed-bottom"
+          class="flex-1 flex flex-column align-center justify-center"
+          style="line-height: 1.5"
+          v-for="(item, index) in actions"
+          :key="index"
+          hover-class="bg-hover-primary"
+          @click="handleBottomEvent(item)"
         >
-          <view
-		     class="flex-1 flex flex-column align-center justify-center"
-			 style="line-height:1.5;"
-			 v-for="(item, index) in actions" :key="index"
-			 hover-class="bg-hover-primary"
-		  >
-            <text class="iconfont" :class="item.icon"></text>
-            {{ item.name }}
-          </view>
+          <text class="iconfont" :class="item.icon"></text>
+          {{ item.name }}
         </view>
       </view>
+    </view>
+    <fDialog ref="dialog">是否删除选中的文件</fDialog>
   </view>
 </template>
 
 <script>
 import navBar from "@/components/common/nav-bar.vue";
 import fList from "@/components/common/f-list.vue";
+import fDialog from "@/components/common/f-dialog.vue";
 // import uniSearchBar from '@/components/uni-search-bar/uni-search-bar.vue';
 export default {
   components: {
     navBar,
     fList,
+    fDialog,
     // uniSearchBar
   },
   data() {
@@ -145,6 +150,19 @@ export default {
       this.list.forEach((item) => {
         item.checked = checked;
       });
+    },
+    handleBottomEvent(item) {
+      switch (item.name) {
+        case "删除":
+          this.$refs.dialog.open((close) => {
+            close();
+            console.log("删除文件");
+            console.log(this.checkList);
+		  });
+		  break;
+		default:
+			break;
+      }
     },
   },
   computed: {
